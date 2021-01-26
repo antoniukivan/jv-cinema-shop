@@ -1,15 +1,14 @@
 package ua.com.cinema.dao.impl;
 
-import ua.com.cinema.dao.MovieDao;
-import ua.com.cinema.exception.DataProcessingException;
-import ua.com.cinema.lib.Dao;
 import java.util.List;
-import ua.com.cinema.model.Movie;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import ua.com.cinema.dao.MovieDao;
+import ua.com.cinema.exception.DataProcessingException;
+import ua.com.cinema.lib.Dao;
+import ua.com.cinema.model.Movie;
 import ua.com.cinema.util.HibernateUtil;
-
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
