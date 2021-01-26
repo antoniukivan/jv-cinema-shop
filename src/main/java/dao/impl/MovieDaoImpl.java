@@ -2,10 +2,9 @@ package dao.impl;
 
 import dao.MovieDao;
 import lib.Dao;
+import java.util.List;
 import model.Movie;
 import org.apache.log4j.Logger;
-
-import java.util.List;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
