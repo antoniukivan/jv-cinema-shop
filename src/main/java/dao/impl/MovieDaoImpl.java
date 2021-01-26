@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.MovieDao;
+import exception.DataProcessingException;
 import lib.Dao;
 import java.util.List;
 import model.Movie;
@@ -15,7 +16,9 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Long itemId = (Long) session.save(movie);
             transaction.commit();
@@ -25,9 +28,11 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can't insert movie entity", e);
+            throw new DataProcessingException("Can't insert movie entity: " + movie);
         } finally {
-
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
@@ -37,7 +42,7 @@ public class MovieDaoImpl implements MovieDao {
             Query<Movie> getAllMoviesQuery = session.createQuery("from Movie", Movie.class);
             return getAllMoviesQuery.getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Can't get all movies", e);
+            throw new DataProcessingException("Can't get all movies");
         }
     }
 }
