@@ -1,7 +1,7 @@
-package dao;
+package ua.com.cinema.dao;
 
 import java.util.List;
-import model.Movie;
+import ua.com.cinema.model.Movie;
 
 public interface MovieDao {
     Movie add(Movie movie);

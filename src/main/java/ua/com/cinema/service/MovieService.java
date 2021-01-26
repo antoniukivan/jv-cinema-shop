@@ -1,7 +1,7 @@
-package service;
+package ua.com.cinema.service;
 
 import java.util.List;
-import model.Movie;
+import ua.com.cinema.model.Movie;
 
 public interface MovieService {
     Movie add(Movie movie);

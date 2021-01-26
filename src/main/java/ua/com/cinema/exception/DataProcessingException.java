@@ -1,0 +1,7 @@
+package ua.com.cinema.exception;
+
+public class DataProcessingException extends RuntimeException {
+    public DataProcessingException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
