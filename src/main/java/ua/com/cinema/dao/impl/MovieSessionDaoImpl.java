@@ -7,9 +7,11 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import ua.com.cinema.dao.MovieSessionDao;
 import ua.com.cinema.exception.DataProcessingException;
+import ua.com.cinema.lib.Dao;
 import ua.com.cinema.model.MovieSession;
 import ua.com.cinema.util.HibernateUtil;
 
+@Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
     @Override
     public MovieSession add(MovieSession movieSession) {
