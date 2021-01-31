@@ -43,7 +43,8 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
                     + " and ms.showTime.toLocalDate().equals(" + date + ")", MovieSession.class);
             return getAllMovieSessionsQuery.getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get all movies", e);
+            throw new DataProcessingException("Can't find movie sessions by movie ID: "
+                    + movieId + " and by date: " + date, e);
         }
     }
 }

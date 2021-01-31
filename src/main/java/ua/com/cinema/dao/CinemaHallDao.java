@@ -1,4 +1,4 @@
-package ua.com.cinema.dao.impl;
+package ua.com.cinema.dao;
 
 import java.util.List;
 import ua.com.cinema.model.CinemaHall;
