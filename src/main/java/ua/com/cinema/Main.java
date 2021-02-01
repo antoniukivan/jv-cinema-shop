@@ -6,14 +6,20 @@ import ua.com.cinema.lib.Injector;
 import ua.com.cinema.model.CinemaHall;
 import ua.com.cinema.model.Movie;
 import ua.com.cinema.model.MovieSession;
+import ua.com.cinema.service.CinemaHallService;
 import ua.com.cinema.service.MovieService;
 import ua.com.cinema.service.MovieSessionService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("ua.com.cinema");
+    private static final MovieService movieService
+            = (MovieService) injector.getInstance(MovieService.class);
+    private static final CinemaHallService cinemaHallService
+            = (CinemaHallService) injector.getInstance(CinemaHallService.class);
+    private static final MovieSessionService movieSessionService
+            = (MovieSessionService) injector.getInstance(MovieSessionService.class);
 
     public static void main(String[] args) {
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
         movie.setTitle("Dracula");
         movie = movieService.add(movie);
@@ -21,14 +27,15 @@ public class Main {
 
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(100);
+        cinemaHallService.add(cinemaHall);
+        cinemaHallService.getAll().forEach(System.out::println);
 
-        MovieSessionService movieSessionService
-                = (MovieSessionService) injector.getInstance(MovieSessionService.class);
         MovieSession movieSession = new MovieSession();
         movieSession.setMovie(movie);
         movieSession.setShowTime(LocalDateTime.now());
         movieSession.setCinemaHall(cinemaHall);
         movieSessionService.add(movieSession);
+        System.out.println();
         movieSessionService.findAvailableSessions(1L, LocalDate.now()).forEach(System.out::println);
     }
 }

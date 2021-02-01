@@ -27,7 +27,8 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert movie session entity: " + movieSession, e);
+            throw new DataProcessingException("Can't insert movie session entity: "
+                    + movieSession, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -38,9 +39,13 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<MovieSession> getAllMovieSessionsQuery = session.createQuery("from MovieSession ms "
-                    + "where ms.movie.id = " + movieId
-                    + " and ms.showTime.toLocalDate().equals(" + date + ")", MovieSession.class);
+            Query<MovieSession> getAllMovieSessionsQuery
+                    = session.createQuery("from MovieSession ms "
+                    + "join fetch ms.movie join fetch  ms.cinemaHall "
+                    + "where ms.movie.id = :movieId "
+                    + "and DATE_FORMAT(ms.showTime,'%Y-%m-%d') = :date", MovieSession.class);
+            getAllMovieSessionsQuery.setParameter("movieId", movieId);
+            getAllMovieSessionsQuery.setParameter("date", date.toString());
             return getAllMovieSessionsQuery.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Can't find movie sessions by movie ID: "
