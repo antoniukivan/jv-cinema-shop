@@ -6,6 +6,8 @@ import ua.com.cinema.lib.Injector;
 import ua.com.cinema.model.CinemaHall;
 import ua.com.cinema.model.Movie;
 import ua.com.cinema.model.MovieSession;
+import ua.com.cinema.model.User;
+import ua.com.cinema.security.AuthenticationService;
 import ua.com.cinema.service.CinemaHallService;
 import ua.com.cinema.service.MovieService;
 import ua.com.cinema.service.MovieSessionService;
@@ -18,6 +20,8 @@ public class Main {
             = (CinemaHallService) injector.getInstance(CinemaHallService.class);
     private static final MovieSessionService movieSessionService
             = (MovieSessionService) injector.getInstance(MovieSessionService.class);
+    private static final AuthenticationService authenticationService
+            = (AuthenticationService) injector.getInstance(AuthenticationService.class);
 
     public static void main(String[] args) {
         Movie movie = new Movie();
@@ -35,8 +39,13 @@ public class Main {
         movieSession.setShowTime(LocalDateTime.now());
         movieSession.setCinemaHall(cinemaHall);
         movieSessionService.add(movieSession);
-        System.out.println();
         Long movieId = movie.getId();
-        movieSessionService.findAvailableSessions(movieId, LocalDate.now()).forEach(System.out::println);
+        movieSessionService.findAvailableSessions(movieId, LocalDate.now())
+                .forEach(System.out::println);
+
+        User alex = authenticationService.register("alex@mail.com", "123");
+        System.out.println(alex);
+        alex = authenticationService.login("alex@mail.com", "123");
+        System.out.println(alex);
     }
 }
