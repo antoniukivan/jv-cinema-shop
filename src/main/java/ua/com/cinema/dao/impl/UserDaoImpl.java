@@ -6,9 +6,11 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import ua.com.cinema.dao.UserDao;
 import ua.com.cinema.exception.DataProcessingException;
+import ua.com.cinema.lib.Dao;
 import ua.com.cinema.model.User;
 import ua.com.cinema.util.HibernateUtil;
 
+@Dao
 public class UserDaoImpl implements UserDao {
     @Override
     public User add(User user) {
