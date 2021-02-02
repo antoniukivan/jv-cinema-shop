@@ -2,6 +2,7 @@ package ua.com.cinema;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import ua.com.cinema.exception.AuthenticationException;
 import ua.com.cinema.lib.Injector;
 import ua.com.cinema.model.CinemaHall;
 import ua.com.cinema.model.Movie;
@@ -23,7 +24,7 @@ public class Main {
     private static final AuthenticationService authenticationService
             = (AuthenticationService) injector.getInstance(AuthenticationService.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AuthenticationException {
         Movie movie = new Movie();
         movie.setTitle("Dracula");
         movie = movieService.add(movie);
