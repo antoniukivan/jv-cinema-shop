@@ -5,6 +5,7 @@ import ua.com.cinema.dao.UserDao;
 import ua.com.cinema.lib.Inject;
 import ua.com.cinema.lib.Service;
 import ua.com.cinema.model.User;
+import ua.com.cinema.util.HashUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -13,6 +14,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
+        byte[] salt = HashUtil.getSalt();
+        String hashedPassword = HashUtil.hashPassword(user.getPassword(), salt);
+        user.setPassword(hashedPassword);
+        user.setSalt(salt);
         return userDao.add(user);
     }
 
