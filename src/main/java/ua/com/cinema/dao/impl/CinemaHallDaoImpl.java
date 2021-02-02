@@ -4,29 +4,29 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import ua.com.cinema.dao.MovieDao;
+import ua.com.cinema.dao.CinemaHallDao;
 import ua.com.cinema.exception.DataProcessingException;
 import ua.com.cinema.lib.Dao;
-import ua.com.cinema.model.Movie;
+import ua.com.cinema.model.CinemaHall;
 import ua.com.cinema.util.HibernateUtil;
 
 @Dao
-public class MovieDaoImpl implements MovieDao {
+public class CinemaHallDaoImpl implements CinemaHallDao {
     @Override
-    public Movie add(Movie movie) {
+    public CinemaHall add(CinemaHall cinemaHall) {
         Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.persist(movie);
+            session.persist(cinemaHall);
             transaction.commit();
-            return movie;
+            return cinemaHall;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert movie entity: " + movie, e);
+            throw new DataProcessingException("Can't insert cinema hall entity: " + cinemaHall, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -35,12 +35,13 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public List<Movie> getAll() {
+    public List<CinemaHall> getAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Movie> getAllMoviesQuery = session.createQuery("from Movie", Movie.class);
-            return getAllMoviesQuery.getResultList();
+            Query<CinemaHall> getAllCinemaHallsQuery
+                    = session.createQuery("from CinemaHall ", CinemaHall.class);
+            return getAllCinemaHallsQuery.getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get all movies", e);
+            throw new DataProcessingException("Can't get all cinema halls", e);
         }
     }
 }
