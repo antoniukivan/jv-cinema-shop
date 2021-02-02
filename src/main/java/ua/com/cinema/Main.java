@@ -36,6 +36,7 @@ public class Main {
         movieSession.setCinemaHall(cinemaHall);
         movieSessionService.add(movieSession);
         System.out.println();
-        movieSessionService.findAvailableSessions(1L, LocalDate.now()).forEach(System.out::println);
+        Long movieId = movie.getId();
+        movieSessionService.findAvailableSessions(movieId, LocalDate.now()).forEach(System.out::println);
     }
 }
