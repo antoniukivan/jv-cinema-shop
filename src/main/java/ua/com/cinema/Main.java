@@ -24,7 +24,7 @@ public class Main {
     private static final AuthenticationService authenticationService
             = (AuthenticationService) injector.getInstance(AuthenticationService.class);
 
-    public static void main(String[] args) throws AuthenticationException {
+    public static void main(String[] args) {
         Movie movie = new Movie();
         movie.setTitle("Dracula");
         movie = movieService.add(movie);
@@ -46,7 +46,11 @@ public class Main {
 
         User alex = authenticationService.register("alex@mail.com", "123");
         System.out.println(alex);
-        alex = authenticationService.login("alex@mail.com", "123");
+        try {
+            alex = authenticationService.login("alex@mail.com", "123");
+        } catch (AuthenticationException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println(alex);
     }
 }
