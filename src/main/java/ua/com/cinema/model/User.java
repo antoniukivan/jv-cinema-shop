@@ -1,12 +1,10 @@
 package ua.com.cinema.model;
 
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -17,8 +15,6 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @OneToMany
-    private List<Ticket> tickets;
     private String password;
     private byte[] salt;
 
@@ -36,14 +32,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
     }
 
     public String getPassword() {
@@ -67,7 +55,6 @@ public class User {
         return "User{"
                 + "id=" + id
                 + ", email='" + email + '\''
-                + ", tickets=" + tickets
                 + '}';
     }
 }

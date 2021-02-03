@@ -3,17 +3,31 @@ package ua.com.cinema.model;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 public class ShoppingCart {
     @Id
+    private Long id;
+
     @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
     private User user;
 
     @OneToMany
     private List<Ticket> tickets;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public User getUser() {
         return user;
@@ -34,6 +48,7 @@ public class ShoppingCart {
     @Override
     public String toString() {
         return "ShoppingCart{"
+                + "id=" + id
                 + ", user=" + user
                 + ", tickets=" + tickets
                 + '}';
