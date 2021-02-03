@@ -2,8 +2,6 @@ package ua.com.cinema.model;
 
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -11,22 +9,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class ShoppingCart {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @OneToOne
     private User user;
 
     @OneToMany
     private List<Ticket> tickets;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public User getUser() {
         return user;
@@ -47,7 +34,6 @@ public class ShoppingCart {
     @Override
     public String toString() {
         return "ShoppingCart{"
-                + "id=" + id
                 + ", user=" + user
                 + ", tickets=" + tickets
                 + '}';

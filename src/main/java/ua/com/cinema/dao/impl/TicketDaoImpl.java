@@ -4,9 +4,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import ua.com.cinema.dao.TicketDao;
 import ua.com.cinema.exception.DataProcessingException;
+import ua.com.cinema.lib.Dao;
 import ua.com.cinema.model.Ticket;
 import ua.com.cinema.util.HibernateUtil;
 
+@Dao
 public class TicketDaoImpl implements TicketDao {
     @Override
     public Ticket add(Ticket ticket) {

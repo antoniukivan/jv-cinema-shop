@@ -1,4 +1,4 @@
-package ua.com.cinema.service.impl;
+package ua.com.cinema.service;
 
 import java.util.Optional;
 import ua.com.cinema.model.User;

@@ -5,6 +5,7 @@ import ua.com.cinema.dao.UserDao;
 import ua.com.cinema.lib.Inject;
 import ua.com.cinema.lib.Service;
 import ua.com.cinema.model.User;
+import ua.com.cinema.service.UserService;
 import ua.com.cinema.util.HashUtil;
 
 @Service
