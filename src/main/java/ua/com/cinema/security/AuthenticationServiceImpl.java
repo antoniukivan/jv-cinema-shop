@@ -1,5 +1,6 @@
 package ua.com.cinema.security;
 
+import java.util.Optional;
 import ua.com.cinema.exception.AuthenticationException;
 import ua.com.cinema.lib.Inject;
 import ua.com.cinema.lib.Service;
@@ -14,13 +15,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
-        User user = userService.findByEmail(email).orElseThrow(()
-                -> new AuthenticationException("User with this email was not found"));
-        String hashedPassword = HashUtil.hashPassword(password, user.getSalt());
-        if (hashedPassword.equals(user.getPassword())) {
-            return user;
+        Optional<User> userOptional = userService.findByEmail(email);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            String hashedPassword = HashUtil.hashPassword(password, user.getSalt());
+            if (hashedPassword.equals(user.getPassword())) {
+                return user;
+            }
         }
-        throw new AuthenticationException("Wrong password");
+        throw new AuthenticationException("Wrong email or password");
     }
 
     @Override
