@@ -52,6 +52,16 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public void update(ShoppingCart shoppingCart) {
-
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<ShoppingCart> updateShoppingCart
+                    = session.createQuery("update ShoppingCart sc set sc.tickets = :tickets " +
+                    "where sc.user.email = :email ", ShoppingCart.class);
+            updateShoppingCart.setParameter("email", shoppingCart.getUser().getEmail());
+            updateShoppingCart.setParameter("tickets", shoppingCart.getTickets());
+            updateShoppingCart.executeUpdate();
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't update shopping cart: "
+                    + shoppingCart, e);
+        }
     }
 }
