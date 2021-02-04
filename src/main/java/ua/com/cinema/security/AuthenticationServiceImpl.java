@@ -5,13 +5,16 @@ import ua.com.cinema.exception.AuthenticationException;
 import ua.com.cinema.lib.Inject;
 import ua.com.cinema.lib.Service;
 import ua.com.cinema.model.User;
-import ua.com.cinema.service.impl.UserService;
+import ua.com.cinema.service.ShoppingCartService;
+import ua.com.cinema.service.UserService;
 import ua.com.cinema.util.HashUtil;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     private UserService userService;
+    @Inject
+    private ShoppingCartService shoppingCartService;
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
@@ -32,6 +35,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setEmail(email);
         user.setPassword(password);
         user = userService.add(user);
+        shoppingCartService.registerNewShoppingCart(user);
         return user;
     }
 }
