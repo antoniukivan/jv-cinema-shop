@@ -75,11 +75,11 @@ public class Main {
         shoppingCartService.addSession(availableSessions.get(1), alex);
         ShoppingCart alexShoppingCart = shoppingCartService.getByUser(alex);
         System.out.println(alexShoppingCart.getUser());
-        System.out.println(alexShoppingCart.getTickets());
+        alexShoppingCart.getTickets().forEach(System.out::println);
 
         Order alexOrder = orderService.completeOrder(alexShoppingCart);
         System.out.println(alexOrder);
         System.out.println(alexShoppingCart);
-        System.out.println(orderService.getOrdersHistory(alex));
+        orderService.getOrdersHistory(alex).forEach(System.out::println);
     }
 }
