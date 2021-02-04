@@ -8,12 +8,14 @@ import ua.com.cinema.lib.Injector;
 import ua.com.cinema.model.CinemaHall;
 import ua.com.cinema.model.Movie;
 import ua.com.cinema.model.MovieSession;
+import ua.com.cinema.model.Order;
 import ua.com.cinema.model.ShoppingCart;
 import ua.com.cinema.model.User;
 import ua.com.cinema.security.AuthenticationService;
 import ua.com.cinema.service.CinemaHallService;
 import ua.com.cinema.service.MovieService;
 import ua.com.cinema.service.MovieSessionService;
+import ua.com.cinema.service.OrderService;
 import ua.com.cinema.service.ShoppingCartService;
 
 public class Main {
@@ -28,11 +30,13 @@ public class Main {
             = (AuthenticationService) injector.getInstance(AuthenticationService.class);
     private static final ShoppingCartService shoppingCartService
             = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+    private static final OrderService orderService
+            = (OrderService) injector.getInstance(OrderService.class);
 
     public static void main(String[] args) {
-        Movie movie = new Movie();
-        movie.setTitle("Dracula");
-        movie = movieService.add(movie);
+        Movie dracula = new Movie();
+        dracula.setTitle("Dracula");
+        dracula = movieService.add(dracula);
         System.out.println("All movies:");
         movieService.getAll().forEach(System.out::println);
 
@@ -43,11 +47,16 @@ public class Main {
         cinemaHallService.getAll().forEach(System.out::println);
 
         MovieSession movieSession = new MovieSession();
-        movieSession.setMovie(movie);
+        movieSession.setMovie(dracula);
         movieSession.setShowTime(LocalDateTime.now());
         movieSession.setCinemaHall(cinemaHall);
         movieSessionService.add(movieSession);
-        Long movieId = movie.getId();
+        MovieSession movieSession1 = new MovieSession();
+        movieSession1.setMovie(dracula);
+        movieSession1.setShowTime(LocalDateTime.now().plusHours(3));
+        movieSession1.setCinemaHall(cinemaHall);
+        movieSessionService.add(movieSession1);
+        Long movieId = dracula.getId();
         List<MovieSession> availableSessions
                 = movieSessionService.findAvailableSessions(movieId, LocalDate.now());
         System.out.println("Available sessions:");
@@ -63,10 +72,14 @@ public class Main {
         System.out.println(alex);
 
         shoppingCartService.addSession(availableSessions.get(0), alex);
+        shoppingCartService.addSession(availableSessions.get(1), alex);
         ShoppingCart alexShoppingCart = shoppingCartService.getByUser(alex);
         System.out.println(alexShoppingCart.getUser());
         System.out.println(alexShoppingCart.getTickets());
-        shoppingCartService.clear(alexShoppingCart);
-        System.out.println(alexShoppingCart.getTickets());
+
+        Order alexOrder = orderService.completeOrder(alexShoppingCart);
+        System.out.println(alexOrder);
+        System.out.println(alexShoppingCart);
+        System.out.println(orderService.getOrdersHistory(alex));
     }
 }
