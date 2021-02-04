@@ -1,5 +1,6 @@
 package ua.com.cinema.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import ua.com.cinema.dao.OrderDao;
 import ua.com.cinema.lib.Inject;
@@ -21,9 +22,11 @@ public class OrderServiceImpl implements OrderService {
     public Order completeOrder(ShoppingCart shoppingCart) {
         Order order = new Order();
         order.setUser(shoppingCart.getUser());
+        order.setPurchaseTime(LocalDateTime.now());
         order.setTickets(shoppingCart.getTickets());
+        orderDao.add(order);
         shoppingCartService.clear(shoppingCart);
-        return orderDao.add(order);
+        return order;
     }
 
     @Override

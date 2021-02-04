@@ -1,5 +1,6 @@
 package ua.com.cinema.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +22,8 @@ public class Order {
     @ManyToOne
     private User user;
 
+    private LocalDateTime purchaseTime;
+
     @OneToMany
     @JoinTable(name = "orders_tickets",
             joinColumns = @JoinColumn(name = "order_id"),
@@ -29,6 +32,14 @@ public class Order {
 
     public Long getId() {
         return id;
+    }
+
+    public LocalDateTime getPurchaseTime() {
+        return purchaseTime;
+    }
+
+    public void setPurchaseTime(LocalDateTime purchaseTime) {
+        this.purchaseTime = purchaseTime;
     }
 
     public void setId(Long id) {
@@ -56,6 +67,7 @@ public class Order {
         return "Order{"
                 + "id=" + id
                 + ", user=" + user
+                + ", purchaseTime=" + purchaseTime
                 + ", tickets=" + tickets
                 + '}';
     }

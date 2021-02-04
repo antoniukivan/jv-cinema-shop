@@ -3,7 +3,6 @@ package ua.com.cinema.service.impl;
 import java.util.Collections;
 import ua.com.cinema.dao.ShoppingCartDao;
 import ua.com.cinema.dao.TicketDao;
-import ua.com.cinema.exception.DataProcessingException;
 import ua.com.cinema.lib.Inject;
 import ua.com.cinema.lib.Service;
 import ua.com.cinema.model.MovieSession;
@@ -25,17 +24,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ticket.setMovieSession(movieSession);
         ticket.setUser(user);
 
-        ShoppingCart shoppingCart;
-        try {
-            shoppingCart = shoppingCartDao.getByUser(user);
-        } catch (DataProcessingException e) {
-            return;
-        }
-        if (shoppingCart != null) {
-            shoppingCart.getTickets().add(ticket);
-            ticketDao.add(ticket);
-            shoppingCartDao.update(shoppingCart);
-        }
+        ShoppingCart shoppingCart = shoppingCartDao.getByUser(user);
+        shoppingCart.getTickets().add(ticket);
+
+        ticketDao.add(ticket);
+        shoppingCartDao.update(shoppingCart);
     }
 
     @Override
