@@ -1,16 +1,18 @@
 package ua.com.cinema.service.impl;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import ua.com.cinema.dao.CinemaHallDao;
-import ua.com.cinema.lib.Inject;
-import ua.com.cinema.lib.Service;
 import ua.com.cinema.model.CinemaHall;
 import ua.com.cinema.service.CinemaHallService;
 
 @Service
 public class CinemaHallServiceImpl implements CinemaHallService {
-    @Inject
-    private CinemaHallDao cinemaHallDao;
+    private final CinemaHallDao cinemaHallDao;
+
+    public CinemaHallServiceImpl(CinemaHallDao cinemaHallDao) {
+        this.cinemaHallDao = cinemaHallDao;
+    }
 
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
