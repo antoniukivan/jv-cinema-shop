@@ -3,11 +3,13 @@ package ua.com.cinema;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ua.com.cinema.config.AppConfig;
 import ua.com.cinema.exception.AuthenticationException;
-import ua.com.cinema.lib.Injector;
 import ua.com.cinema.model.CinemaHall;
 import ua.com.cinema.model.Movie;
 import ua.com.cinema.model.MovieSession;
+import ua.com.cinema.model.Order;
 import ua.com.cinema.model.ShoppingCart;
 import ua.com.cinema.model.User;
 import ua.com.cinema.security.AuthenticationService;
@@ -16,21 +18,22 @@ import ua.com.cinema.service.MovieService;
 import ua.com.cinema.service.MovieSessionService;
 import ua.com.cinema.service.OrderService;
 import ua.com.cinema.service.ShoppingCartService;
+import ua.com.cinema.service.UserService;
 
 public class Main {
-    private static final Injector injector = Injector.getInstance("ua.com.cinema");
-    private static final MovieService movieService
-            = (MovieService) injector.getInstance(MovieService.class);
+    private static final AnnotationConfigApplicationContext context
+            = new AnnotationConfigApplicationContext(AppConfig.class);
+    private static final UserService userService = context.getBean(UserService.class);
+    private static final MovieService movieService = context.getBean(MovieService.class);
     private static final CinemaHallService cinemaHallService
-            = (CinemaHallService) injector.getInstance(CinemaHallService.class);
+            = context.getBean(CinemaHallService.class);
     private static final MovieSessionService movieSessionService
-            = (MovieSessionService) injector.getInstance(MovieSessionService.class);
+            = context.getBean(MovieSessionService.class);
     private static final AuthenticationService authenticationService
-            = (AuthenticationService) injector.getInstance(AuthenticationService.class);
+            = context.getBean(AuthenticationService.class);
     private static final ShoppingCartService shoppingCartService
-            = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
-    private static final OrderService orderService
-            = (OrderService) injector.getInstance(OrderService.class);
+            = context.getBean(ShoppingCartService.class);
+    private static final OrderService orderService = context.getBean(OrderService.class);
 
     public static void main(String[] args) {
         Movie dracula = new Movie();
@@ -77,9 +80,9 @@ public class Main {
         System.out.println(alexShoppingCart.getUser());
         alexShoppingCart.getTickets().forEach(System.out::println);
 
-//        Order alexOrder = orderService.completeOrder(alexShoppingCart);
-//        System.out.println(alexOrder);
-//        System.out.println(alexShoppingCart);
-//        orderService.getOrdersHistory(alex).forEach(System.out::println);
+        Order alexOrder = orderService.completeOrder(alexShoppingCart);
+        System.out.println(alexOrder);
+        System.out.println(alexShoppingCart);
+        orderService.getOrdersHistory(alex).forEach(System.out::println);
     }
 }
