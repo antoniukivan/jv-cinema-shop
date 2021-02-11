@@ -8,7 +8,6 @@ import ua.com.cinema.lib.Injector;
 import ua.com.cinema.model.CinemaHall;
 import ua.com.cinema.model.Movie;
 import ua.com.cinema.model.MovieSession;
-import ua.com.cinema.model.Order;
 import ua.com.cinema.model.ShoppingCart;
 import ua.com.cinema.model.User;
 import ua.com.cinema.security.AuthenticationService;
@@ -63,6 +62,7 @@ public class Main {
         availableSessions.forEach(System.out::println);
 
         User alex = authenticationService.register("alex@mail.com", "123");
+        User alex1 = authenticationService.register("alex1@mail.com", "123");
         System.out.println(alex);
         try {
             alex = authenticationService.login("alex@mail.com", "123");
@@ -77,9 +77,9 @@ public class Main {
         System.out.println(alexShoppingCart.getUser());
         alexShoppingCart.getTickets().forEach(System.out::println);
 
-        Order alexOrder = orderService.completeOrder(alexShoppingCart);
-        System.out.println(alexOrder);
-        System.out.println(alexShoppingCart);
-        orderService.getOrdersHistory(alex).forEach(System.out::println);
+//        Order alexOrder = orderService.completeOrder(alexShoppingCart);
+//        System.out.println(alexOrder);
+//        System.out.println(alexShoppingCart);
+//        orderService.getOrdersHistory(alex).forEach(System.out::println);
     }
 }
