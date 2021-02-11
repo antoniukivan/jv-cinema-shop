@@ -9,7 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import spring.intro.model.User;
+import ua.com.cinema.model.CinemaHall;
+import ua.com.cinema.model.Movie;
+import ua.com.cinema.model.MovieSession;
+import ua.com.cinema.model.Order;
+import ua.com.cinema.model.ShoppingCart;
+import ua.com.cinema.model.Ticket;
+import ua.com.cinema.model.User;
 
 @Configuration
 @PropertySource("classpath:db.properties")
@@ -44,6 +50,12 @@ public class AppConfig {
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
 
         factoryBean.setHibernateProperties(properties);
+        factoryBean.setAnnotatedClasses(CinemaHall.class);
+        factoryBean.setAnnotatedClasses(Movie.class);
+        factoryBean.setAnnotatedClasses(MovieSession.class);
+        factoryBean.setAnnotatedClasses(Order.class);
+        factoryBean.setAnnotatedClasses(ShoppingCart.class);
+        factoryBean.setAnnotatedClasses(Ticket.class);
         factoryBean.setAnnotatedClasses(User.class);
 
         return factoryBean;
