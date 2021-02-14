@@ -8,17 +8,15 @@ public class MovieRequestDto {
         return title;
     }
 
-    public MovieRequestDto setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public MovieRequestDto setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
-        return this;
     }
 }
