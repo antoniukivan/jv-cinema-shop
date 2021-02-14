@@ -1,4 +1,4 @@
-package ua.com.cinema.model.dto.movie;
+package ua.com.cinema.model.dto;
 
 public class MovieResponseDto {
     private Long id;

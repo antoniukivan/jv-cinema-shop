@@ -2,8 +2,8 @@ package ua.com.cinema.service.mappers;
 
 import org.springframework.stereotype.Component;
 import ua.com.cinema.model.Movie;
-import ua.com.cinema.model.dto.movie.MovieRequestDto;
-import ua.com.cinema.model.dto.movie.MovieResponseDto;
+import ua.com.cinema.model.dto.MovieRequestDto;
+import ua.com.cinema.model.dto.MovieResponseDto;
 
 @Component
 public class MovieMapper implements DtoMapper<Movie, MovieRequestDto, MovieResponseDto> {
