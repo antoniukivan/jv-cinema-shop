@@ -2,6 +2,7 @@ package ua.com.cinema.dao.impl;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -35,6 +36,58 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             }
             throw new DataProcessingException("Can't insert movie session entity: "
                     + movieSession, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public void update(MovieSession movieSession) {
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.update(movieSession);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't update movie session entity: "
+                    + movieSession, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public Optional<MovieSession> getById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return Optional.ofNullable(session.get(MovieSession.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't get movie session by id: " + id, e);
+        }
+    }
+
+    @Override
+    public void delete(Long id) {
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.delete(session.load(MovieSession.class, id));
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't delete movie session entity", e);
         } finally {
             if (session != null) {
                 session.close();
