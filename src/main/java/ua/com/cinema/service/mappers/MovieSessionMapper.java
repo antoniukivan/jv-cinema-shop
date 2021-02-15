@@ -31,10 +31,11 @@ public class MovieSessionMapper implements DtoMapper<MovieSession, MovieSessionR
 
     @Override
     public MovieSessionResponseDto getDtoFromModel(MovieSession movieSession) {
-        return new MovieSessionResponseDto()
-                .setId(movieSession.getId())
-                .setMovieTitle(movieSession.getMovie().getTitle())
-                .setCinemaHallId(movieSession.getCinemaHall().getId())
-                .setShowTime(movieSession.getShowTime());
+        MovieSessionResponseDto responseDto = new MovieSessionResponseDto();
+        responseDto.setId(movieSession.getId());
+        responseDto.setMovieTitle(movieSession.getMovie().getTitle());
+        responseDto.setCinemaHallId(movieSession.getCinemaHall().getId());
+        responseDto.setShowTime(movieSession.getShowTime().toString());
+        return responseDto;
     }
 }

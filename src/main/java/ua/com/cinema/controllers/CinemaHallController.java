@@ -13,7 +13,7 @@ import ua.com.cinema.service.CinemaHallService;
 import ua.com.cinema.service.mappers.CinemaHallMapper;
 
 @RestController
-@RequestMapping(value = "/cinema-halls")
+@RequestMapping("/cinema-halls")
 public class CinemaHallController {
     private final CinemaHallService cinemaHallService;
     private final CinemaHallMapper cinemaHallMapper;

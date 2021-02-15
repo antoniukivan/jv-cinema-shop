@@ -13,7 +13,7 @@ import ua.com.cinema.service.MovieService;
 import ua.com.cinema.service.mappers.MovieMapper;
 
 @RestController
-@RequestMapping(value = "/movies")
+@RequestMapping("/movies")
 public class MovieController {
     private final MovieService movieService;
     private final MovieMapper movieMapper;

@@ -20,7 +20,7 @@ import ua.com.cinema.service.MovieSessionService;
 import ua.com.cinema.service.mappers.MovieSessionMapper;
 
 @RestController
-@RequestMapping(value = "/movie-sessions")
+@RequestMapping("/movie-sessions")
 public class MovieSessionController {
     private static final String DATE_PATTERN = "dd.MM.yyyy";
     private final MovieSessionService movieSessionService;
@@ -37,7 +37,7 @@ public class MovieSessionController {
         movieSessionService.add(movieSessionMapper.getModelFromDto(movieSessionRequestDto));
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping("/{id}")
     public void update(@PathVariable Long id,
                        @RequestBody MovieSessionRequestDto movieSessionRequestDto) {
         MovieSession movieSession = movieSessionMapper.getModelFromDto(movieSessionRequestDto);
@@ -45,15 +45,15 @@ public class MovieSessionController {
         movieSessionService.update(movieSession);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         movieSessionService.delete(id);
     }
 
-    @GetMapping(value = "/available")
+    @GetMapping("/available")
     public List<MovieSessionResponseDto> getAllAvailableSessions(
-            @RequestParam(name = "movieId") Long movieId,
-            @RequestParam(name = "date") @DateTimeFormat(pattern = DATE_PATTERN) LocalDate date) {
+            @RequestParam Long movieId,
+            @RequestParam @DateTimeFormat(pattern = DATE_PATTERN) LocalDate date) {
         return movieSessionService.findAvailableSessions(movieId, date).stream()
                 .map(movieSessionMapper::getDtoFromModel)
                 .collect(Collectors.toList());

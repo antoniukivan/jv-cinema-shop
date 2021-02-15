@@ -15,9 +15,10 @@ public class MovieMapper implements DtoMapper<Movie, MovieRequestDto, MovieRespo
     }
 
     public MovieResponseDto getDtoFromModel(Movie movie) {
-        return new MovieResponseDto()
-                .setId(movie.getId())
-                .setTitle(movie.getTitle())
-                .setDescription(movie.getDescription());
+        MovieResponseDto movieResponseDto = new MovieResponseDto();
+        movieResponseDto.setId(movie.getId());
+        movieResponseDto.setTitle(movie.getTitle());
+        movieResponseDto.setDescription(movie.getDescription());
+        return movieResponseDto;
     }
 }

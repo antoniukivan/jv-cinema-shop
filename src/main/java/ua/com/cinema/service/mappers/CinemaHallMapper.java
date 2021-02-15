@@ -12,13 +12,16 @@ public class CinemaHallMapper implements DtoMapper<CinemaHall, CinemaHallRequest
     public CinemaHall getModelFromDto(CinemaHallRequestDto cinemaHallRequestDto) {
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(cinemaHallRequestDto.getCapacity());
+        cinemaHall.setDescription(cinemaHallRequestDto.getDescription());
         return cinemaHall;
     }
 
     @Override
     public CinemaHallResponseDto getDtoFromModel(CinemaHall cinemaHall) {
-        return new CinemaHallResponseDto()
-                .setId(cinemaHall.getId())
-                .setCapacity(cinemaHall.getCapacity());
+        CinemaHallResponseDto responseDto = new CinemaHallResponseDto();
+        responseDto.setId(cinemaHall.getId());
+        responseDto.setCapacity(cinemaHall.getCapacity());
+        responseDto.setDescription(cinemaHall.getDescription());
+        return responseDto;
     }
 }

@@ -1,7 +1,7 @@
 package ua.com.cinema.service.mappers;
 
 public interface DtoMapper<M, P, G> {
-    M getModelFromDto(P value);
+    M getModelFromDto(P requestDto);
 
-    G getDtoFromModel(M value);
+    G getDtoFromModel(M entity);
 }

@@ -2,6 +2,15 @@ package ua.com.cinema.model.dto;
 
 public class CinemaHallRequestDto {
     private int capacity;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public int getCapacity() {
         return capacity;

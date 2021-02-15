@@ -68,7 +68,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     @Override
     public Optional<MovieSession> getById(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            return Optional.ofNullable(session.get(MovieSession.class, id));
+            return Optional.ofNullable(session.load(MovieSession.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie session by id: " + id, e);
         }

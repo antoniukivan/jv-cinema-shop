@@ -1,46 +1,40 @@
 package ua.com.cinema.model.dto;
 
-import java.time.LocalDateTime;
-
 public class MovieSessionResponseDto {
     private Long id;
     private String movieTitle;
     private Long cinemaHallId;
-    private LocalDateTime showTime;
+    private String showTime;
 
     public Long getId() {
         return id;
     }
 
-    public MovieSessionResponseDto setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getMovieTitle() {
         return movieTitle;
     }
 
-    public MovieSessionResponseDto setMovieTitle(String movieTitle) {
+    public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;
-        return this;
     }
 
     public Long getCinemaHallId() {
         return cinemaHallId;
     }
 
-    public MovieSessionResponseDto setCinemaHallId(Long cinemaHallId) {
+    public void setCinemaHallId(Long cinemaHallId) {
         this.cinemaHallId = cinemaHallId;
-        return this;
     }
 
-    public LocalDateTime getShowTime() {
+    public String getShowTime() {
         return showTime;
     }
 
-    public MovieSessionResponseDto setShowTime(LocalDateTime showTime) {
+    public void setShowTime(String showTime) {
         this.showTime = showTime;
-        return this;
     }
 }
