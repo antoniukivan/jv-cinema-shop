@@ -1,6 +1,7 @@
 package ua.com.cinema.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -52,11 +53,9 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
     }
 
     @Override
-    public CinemaHall getById(Long id) {
+    public Optional<CinemaHall> getById(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("from CinemaHall c where c.id = :id", CinemaHall.class)
-                    .setParameter("id", id)
-                    .getSingleResult();
+            return Optional.ofNullable(session.get(CinemaHall.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get cinema hall by id: " + id, e);
         }

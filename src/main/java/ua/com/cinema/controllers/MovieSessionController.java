@@ -22,7 +22,7 @@ import ua.com.cinema.service.mappers.MovieSessionMapper;
 @RestController
 @RequestMapping(value = "/movie-sessions")
 public class MovieSessionController {
-    public static final String DATE_PATTERN = "dd.MM.yyyy";
+    private static final String DATE_PATTERN = "dd.MM.yyyy";
     private final MovieSessionService movieSessionService;
     private final MovieSessionMapper movieSessionMapper;
 
@@ -47,7 +47,7 @@ public class MovieSessionController {
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable Long id) {
-        movieSessionService.delete(movieSessionService.getById(id));
+        movieSessionService.delete(id);
     }
 
     @GetMapping(value = "/available")

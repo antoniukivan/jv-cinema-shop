@@ -1,6 +1,7 @@
 package ua.com.cinema.dao;
 
 import java.util.List;
+import java.util.Optional;
 import ua.com.cinema.model.Movie;
 
 public interface MovieDao {
@@ -8,5 +9,5 @@ public interface MovieDao {
 
     List<Movie> getAll();
 
-    Movie getById(Long id);
+    Optional<Movie> getById(Long id);
 }

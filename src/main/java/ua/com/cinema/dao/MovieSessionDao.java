@@ -2,6 +2,7 @@ package ua.com.cinema.dao;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import ua.com.cinema.model.MovieSession;
 
 public interface MovieSessionDao {
@@ -11,7 +12,7 @@ public interface MovieSessionDao {
 
     void update(MovieSession movieSession);
 
-    MovieSession getById(Long id);
+    Optional<MovieSession> getById(Long id);
 
-    void delete(MovieSession movieSession);
+    void delete(Long id);
 }

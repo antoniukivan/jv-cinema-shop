@@ -1,6 +1,7 @@
 package ua.com.cinema.dao;
 
 import java.util.List;
+import java.util.Optional;
 import ua.com.cinema.model.CinemaHall;
 
 public interface CinemaHallDao {
@@ -8,5 +9,5 @@ public interface CinemaHallDao {
 
     List<CinemaHall> getAll();
 
-    CinemaHall getById(Long cinemaHallId);
+    Optional<CinemaHall> getById(Long cinemaHallId);
 }

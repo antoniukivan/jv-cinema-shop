@@ -2,6 +2,7 @@ package ua.com.cinema.dao.impl;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -65,31 +66,28 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     }
 
     @Override
-    public MovieSession getById(Long id) {
+    public Optional<MovieSession> getById(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("from MovieSession m where m.id = :id", MovieSession.class)
-                    .setParameter("id", id)
-                    .getSingleResult();
+            return Optional.ofNullable(session.get(MovieSession.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie session by id: " + id, e);
         }
     }
 
     @Override
-    public void delete(MovieSession movieSession) {
+    public void delete(Long id) {
         Transaction transaction = null;
         Session session = null;
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.delete(movieSession);
+            session.delete(session.get(MovieSession.class, id));
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't delete movie session entity: "
-                    + movieSession, e);
+            throw new DataProcessingException("Can't delete movie session entity", e);
         } finally {
             if (session != null) {
                 session.close();
