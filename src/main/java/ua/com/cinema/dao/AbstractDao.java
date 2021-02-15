@@ -8,13 +8,21 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ua.com.cinema.exception.DataProcessingException;
 
-public abstract class AbstractDao<T, ID extends Serializable> {
+public abstract class AbstractDao<T, I extends Serializable> {
     private final SessionFactory sessionFactory;
-    private final Class<T> type;
+    private final Class<T> clazz;
 
-    protected AbstractDao(SessionFactory sessionFactory, Class<T> type) {
+    protected AbstractDao(SessionFactory sessionFactory, Class<T> clazz) {
         this.sessionFactory = sessionFactory;
-        this.type = type;
+        this.clazz = clazz;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public Class<T> getClazz() {
+        return clazz;
     }
 
     public T add(T entity) {
@@ -30,7 +38,7 @@ public abstract class AbstractDao<T, ID extends Serializable> {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't create: " + entity, e);
+            throw new DataProcessingException("Can't create entity: " + entity, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -40,34 +48,35 @@ public abstract class AbstractDao<T, ID extends Serializable> {
 
     public List<T> getAll() {
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("from " + type.getSimpleName(), type).getResultList();
+            return session.createQuery("from " + clazz.getSimpleName(), clazz).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get all: " + type.getSimpleName(), e);
+            throw new DataProcessingException("Can't get all entities: "
+                    + clazz.getSimpleName(), e);
         }
     }
 
-    public Optional<T> getById(ID id) {
+    public Optional<T> getById(I id) {
         try (Session session = sessionFactory.openSession()) {
-            return Optional.ofNullable(session.get(type, id));
+            return Optional.ofNullable(session.get(clazz, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get: " + type.getSimpleName()
+            throw new DataProcessingException("Can't get entity: " + clazz.getSimpleName()
                     + " by id " + id, e);
         }
     }
 
-    public void delete(ID id) {
+    public void delete(I id) {
         Session session = null;
         Transaction transaction = null;
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.delete(session.load(type, id));
+            session.delete(session.load(clazz, id));
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't delete by id: " + id, e);
+            throw new DataProcessingException("Can't delete entity by id: " + id, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -87,7 +96,7 @@ public abstract class AbstractDao<T, ID extends Serializable> {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't update: " + entity, e);
+            throw new DataProcessingException("Can't update entity: " + entity, e);
         } finally {
             if (session != null) {
                 session.close();
