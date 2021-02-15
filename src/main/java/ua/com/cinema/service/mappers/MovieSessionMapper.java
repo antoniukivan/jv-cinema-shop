@@ -1,5 +1,6 @@
 package ua.com.cinema.service.mappers;
 
+import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 import ua.com.cinema.model.MovieSession;
 import ua.com.cinema.model.dto.MovieSessionRequestDto;
@@ -24,7 +25,7 @@ public class MovieSessionMapper implements DtoMapper<MovieSession, MovieSessionR
         movieSession.setMovie(movieService.getById(movieSessionRequestDto.getMovieId()));
         movieSession.setCinemaHall(cinemaHallService
                 .getById(movieSessionRequestDto.getCinemaHallId()));
-        movieSession.setShowTime(movieSessionRequestDto.getLocalDateTime());
+        movieSession.setShowTime(LocalDateTime.parse(movieSessionRequestDto.getShowTime()));
         return movieSession;
     }
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.com.cinema.model.dto.CinemaHallRequestDto;
@@ -24,7 +25,7 @@ public class CinemaHallController {
     }
 
     @PostMapping
-    public void create(CinemaHallRequestDto cinemaHallRequestDto) {
+    public void create(@RequestBody CinemaHallRequestDto cinemaHallRequestDto) {
         cinemaHallService.add(cinemaHallMapper.getModelFromDto(cinemaHallRequestDto));
     }
 

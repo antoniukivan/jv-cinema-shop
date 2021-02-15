@@ -1,11 +1,9 @@
 package ua.com.cinema.model.dto;
 
-import java.time.LocalDateTime;
-
 public class MovieSessionRequestDto {
     private Long movieId;
     private Long cinemaHallId;
-    private LocalDateTime localDateTime;
+    private String showTime;
 
     public Long getMovieId() {
         return movieId;
@@ -23,11 +21,11 @@ public class MovieSessionRequestDto {
         this.cinemaHallId = cinemaHallId;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public String getShowTime() {
+        return showTime;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setShowTime(String showTime) {
+        this.showTime = showTime;
     }
 }
