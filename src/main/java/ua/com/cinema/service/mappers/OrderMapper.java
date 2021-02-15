@@ -2,6 +2,7 @@ package ua.com.cinema.service.mappers;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import ua.com.cinema.model.Order;
@@ -26,7 +27,11 @@ public class OrderMapper implements DtoMapper<Order, OrderRequestDto, OrderRespo
         Order order = new Order();
         order.setUser(userService.findByEmail(requestDto.getEmail()).get());
         order.setPurchaseTime(LocalDateTime.parse(requestDto.getPurchaseTime()));
-        order.setTickets(ticketService.getAllByUser(order.getUser()));
+        List<Ticket> tickets = requestDto.getTicketIds().stream()
+                .map(ticketService::getById)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+        order.setTickets(tickets);
         return order;
     }
 
@@ -35,7 +40,7 @@ public class OrderMapper implements DtoMapper<Order, OrderRequestDto, OrderRespo
         OrderResponseDto orderResponseDto = new OrderResponseDto();
         orderResponseDto.setId(order.getId());
         orderResponseDto.setPurchaseTime(order.getPurchaseTime().toString());
-        List<Long> ticketsId = ticketService.getAllByUser(order.getUser()).stream()
+        List<Long> ticketsId = order.getTickets().stream()
                 .map(Ticket::getId)
                 .collect(Collectors.toList());
         orderResponseDto.setTickets(ticketsId);

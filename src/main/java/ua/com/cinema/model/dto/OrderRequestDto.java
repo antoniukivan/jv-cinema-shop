@@ -5,7 +5,7 @@ import java.util.List;
 public class OrderRequestDto {
     private String email;
     private String purchaseTime;
-    private List<Long> tickets;
+    private List<Long> ticketIds;
 
     public String getEmail() {
         return email;
@@ -23,11 +23,11 @@ public class OrderRequestDto {
         this.purchaseTime = purchaseTime;
     }
 
-    public List<Long> getTickets() {
-        return tickets;
+    public List<Long> getTicketIds() {
+        return ticketIds;
     }
 
-    public void setTickets(List<Long> tickets) {
-        this.tickets = tickets;
+    public void setTicketIds(List<Long> ticketIds) {
+        this.ticketIds = ticketIds;
     }
 }

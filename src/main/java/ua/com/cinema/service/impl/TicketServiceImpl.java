@@ -1,10 +1,9 @@
 package ua.com.cinema.service.impl;
 
-import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import ua.com.cinema.dao.TicketDao;
 import ua.com.cinema.model.Ticket;
-import ua.com.cinema.model.User;
 import ua.com.cinema.service.TicketService;
 
 @Service
@@ -21,7 +20,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getAllByUser(User user) {
-        return ticketDao.getAllByUser(user);
+    public Optional<Ticket> getById(Long id) {
+        return ticketDao.getById(id);
     }
+
 }

@@ -1,6 +1,7 @@
 package ua.com.cinema.service.mappers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import ua.com.cinema.model.ShoppingCart;
@@ -25,7 +26,11 @@ public class ShoppingCartMapper implements DtoMapper<ShoppingCart,
     public ShoppingCart getModelFromDto(ShoppingCartRequestDto requestDto) {
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setUser(userService.findByEmail(requestDto.getEmail()).get());
-        shoppingCart.setTickets(ticketService.getAllByUser(shoppingCart.getUser()));
+        List<Ticket> tickets = requestDto.getTicketsIds().stream()
+                .map(ticketService::getById)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+        shoppingCart.setTickets(tickets);
         return shoppingCart;
     }
 
@@ -34,7 +39,7 @@ public class ShoppingCartMapper implements DtoMapper<ShoppingCart,
         ShoppingCartResponseDto responseDto = new ShoppingCartResponseDto();
         responseDto.setId(shoppingCart.getId());
         responseDto.setEmail(shoppingCart.getUser().getEmail());
-        List<Long> ticketIds = ticketService.getAllByUser(shoppingCart.getUser()).stream()
+        List<Long> ticketIds = shoppingCart.getTickets().stream()
                 .map(Ticket::getId)
                 .collect(Collectors.toList());
         responseDto.setTicketsIds(ticketIds);
