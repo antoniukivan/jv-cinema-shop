@@ -31,7 +31,7 @@ public abstract class AbstractDao<T, I extends Serializable> {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.persist(entity);
+            session.save(entity);
             transaction.commit();
             return entity;
         } catch (Exception e) {

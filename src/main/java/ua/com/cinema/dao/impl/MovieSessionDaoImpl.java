@@ -13,7 +13,8 @@ import ua.com.cinema.exception.DataProcessingException;
 import ua.com.cinema.model.MovieSession;
 
 @Repository
-public class MovieSessionDaoImpl extends AbstractDao<MovieSession, Long> implements MovieSessionDao {
+public class MovieSessionDaoImpl extends AbstractDao<MovieSession, Long>
+        implements MovieSessionDao {
     @Autowired
     public MovieSessionDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory, MovieSession.class);

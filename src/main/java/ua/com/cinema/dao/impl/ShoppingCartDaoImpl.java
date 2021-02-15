@@ -12,7 +12,8 @@ import ua.com.cinema.model.ShoppingCart;
 import ua.com.cinema.model.User;
 
 @Repository
-public class ShoppingCartDaoImpl extends AbstractDao<ShoppingCart, Long> implements ShoppingCartDao {
+public class ShoppingCartDaoImpl extends AbstractDao<ShoppingCart, Long>
+        implements ShoppingCartDao {
     @Autowired
     public ShoppingCartDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory, ShoppingCart.class);

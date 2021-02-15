@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ua.com.cinema.model.Order;
+import ua.com.cinema.model.User;
 import ua.com.cinema.service.OrderService;
 import ua.com.cinema.service.ShoppingCartService;
 import ua.com.cinema.service.UserService;
@@ -27,7 +28,8 @@ public class OrderController {
 
     @PostMapping("/complete")
     public void complete(@RequestParam Long userId) {
-        orderService.completeOrder(shoppingCartService.getByUser(userService.getById(userId).get()));
+        User user = userService.getById(userId).get();
+        orderService.completeOrder(shoppingCartService.getByUser(user));
     }
 
     @GetMapping
