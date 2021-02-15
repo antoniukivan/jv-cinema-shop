@@ -6,5 +6,7 @@ import ua.com.cinema.model.User;
 public interface UserService {
     User add(User user);
 
+    Optional<User> getById(Long id);
+
     Optional<User> findByEmail(String email);
 }
