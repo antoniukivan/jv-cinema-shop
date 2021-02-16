@@ -17,12 +17,8 @@ public abstract class AbstractDao<T, I extends Serializable> {
         this.clazz = clazz;
     }
 
-    public SessionFactory getSessionFactory() {
+    protected SessionFactory getSessionFactory() {
         return sessionFactory;
-    }
-
-    public Class<T> getClazz() {
-        return clazz;
     }
 
     public T add(T entity) {
