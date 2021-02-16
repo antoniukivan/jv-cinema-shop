@@ -5,7 +5,7 @@ import java.util.Optional;
 import ua.com.cinema.model.Movie;
 
 public interface MovieDao {
-    Movie add(Movie movie);
+    Movie add(Movie entity);
 
     List<Movie> getAll();
 

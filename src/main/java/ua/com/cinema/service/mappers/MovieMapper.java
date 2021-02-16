@@ -6,7 +6,8 @@ import ua.com.cinema.model.dto.MovieRequestDto;
 import ua.com.cinema.model.dto.MovieResponseDto;
 
 @Component
-public class MovieMapper implements DtoMapper<Movie, MovieRequestDto, MovieResponseDto> {
+public class MovieMapper implements DtoMapper<Movie, MovieResponseDto>,
+        ModelMapper<Movie, MovieRequestDto> {
     public Movie getModelFromDto(MovieRequestDto movieRequestDto) {
         Movie movie = new Movie();
         movie.setTitle(movieRequestDto.getTitle());
