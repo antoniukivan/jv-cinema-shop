@@ -6,7 +6,8 @@ import ua.com.cinema.model.dto.UserRequestDto;
 import ua.com.cinema.model.dto.UserResponseDto;
 
 @Component
-public class UserMapper implements DtoMapper<User, UserRequestDto, UserResponseDto> {
+public class UserMapper implements DtoMapper<User, UserResponseDto>,
+        ModelMapper<User, UserRequestDto> {
     @Override
     public User getModelFromDto(UserRequestDto requestDto) {
         User user = new User();

@@ -9,8 +9,8 @@ import ua.com.cinema.service.CinemaHallService;
 import ua.com.cinema.service.MovieService;
 
 @Component
-public class MovieSessionMapper implements DtoMapper<MovieSession, MovieSessionRequestDto,
-        MovieSessionResponseDto> {
+public class MovieSessionMapper implements DtoMapper<MovieSession, MovieSessionResponseDto>,
+        ModelMapper<MovieSession, MovieSessionRequestDto> {
     private final MovieService movieService;
     private final CinemaHallService cinemaHallService;
 

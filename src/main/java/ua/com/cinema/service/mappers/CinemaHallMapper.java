@@ -6,8 +6,8 @@ import ua.com.cinema.model.dto.CinemaHallRequestDto;
 import ua.com.cinema.model.dto.CinemaHallResponseDto;
 
 @Component
-public class CinemaHallMapper implements DtoMapper<CinemaHall, CinemaHallRequestDto,
-        CinemaHallResponseDto> {
+public class CinemaHallMapper implements DtoMapper<CinemaHall, CinemaHallResponseDto>,
+        ModelMapper<CinemaHall, CinemaHallRequestDto> {
     @Override
     public CinemaHall getModelFromDto(CinemaHallRequestDto cinemaHallRequestDto) {
         CinemaHall cinemaHall = new CinemaHall();
