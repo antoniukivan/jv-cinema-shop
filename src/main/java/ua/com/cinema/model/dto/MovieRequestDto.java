@@ -1,7 +1,11 @@
 package ua.com.cinema.model.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class MovieRequestDto {
+    @NotEmpty
     private String title;
+    @NotEmpty
     private String description;
 
     public String getTitle() {
