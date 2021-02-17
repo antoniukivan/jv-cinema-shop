@@ -1,12 +1,9 @@
 package ua.com.cinema.security;
 
-import java.util.Optional;
 import org.springframework.stereotype.Service;
-import ua.com.cinema.exception.AuthenticationException;
 import ua.com.cinema.model.User;
 import ua.com.cinema.service.ShoppingCartService;
 import ua.com.cinema.service.UserService;
-import ua.com.cinema.util.HashUtil;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -17,19 +14,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                                      ShoppingCartService shoppingCartService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
-    }
-
-    @Override
-    public User login(String email, String password) throws AuthenticationException {
-        Optional<User> userOptional = userService.findByEmail(email);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            String hashedPassword = HashUtil.hashPassword(password, user.getSalt());
-            if (hashedPassword.equals(user.getPassword())) {
-                return user;
-            }
-        }
-        throw new AuthenticationException("Wrong email or password");
     }
 
     @Override

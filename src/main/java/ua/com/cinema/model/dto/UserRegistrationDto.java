@@ -1,16 +1,17 @@
 package ua.com.cinema.model.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import ua.com.cinema.validation.Email;
+import ua.com.cinema.validation.Password;
 
+@Password(field = "password", fieldMatch = "repeatPassword")
 public class UserRegistrationDto {
     @Email
     private String email;
-    @NotEmpty
-    @Size(min = 8)
+    @NotEmpty(message = "The password couldn't be empty")
+    @Size(min = 8, message = "Password must be at least 8 symbols long")
     private String password;
-
     private String repeatPassword;
 
     public String getRepeatPassword() {

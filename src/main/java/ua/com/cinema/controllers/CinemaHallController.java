@@ -2,6 +2,7 @@ package ua.com.cinema.controllers;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class CinemaHallController {
     }
 
     @PostMapping
-    public void create(@RequestBody CinemaHallRequestDto cinemaHallRequestDto) {
+    public void create(@RequestBody @Valid CinemaHallRequestDto cinemaHallRequestDto) {
         cinemaHallService.add(cinemaHallMapper.getModelFromDto(cinemaHallRequestDto));
     }
 

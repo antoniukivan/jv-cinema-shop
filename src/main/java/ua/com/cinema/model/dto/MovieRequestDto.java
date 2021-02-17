@@ -1,11 +1,13 @@
 package ua.com.cinema.model.dto;
 
-import jakarta.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class MovieRequestDto {
-    @NotEmpty
+    @NotNull
+    @NotEmpty(message = "The movie title couldn't be empty")
     private String title;
-    @NotEmpty
+    @NotEmpty(message = "The movie description couldn't be empty")
     private String description;
 
     public String getTitle() {
