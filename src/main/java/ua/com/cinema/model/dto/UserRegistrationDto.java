@@ -2,15 +2,15 @@ package ua.com.cinema.model.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import ua.com.cinema.validation.Email;
 
 public class UserRegistrationDto {
-    @NotEmpty
+    @Email
     private String email;
     @NotEmpty
     @Size(min = 8)
     private String password;
-    @NotEmpty
-    @Size(min = 8)
+
     private String repeatPassword;
 
     public String getRepeatPassword() {
