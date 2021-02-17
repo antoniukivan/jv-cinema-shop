@@ -23,7 +23,7 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
         if (fieldValue != null) {
             return fieldValue.equals(fieldMatchValue);
         } else {
-            return fieldMatchValue == null;
+            return false;
         }
     }
 }

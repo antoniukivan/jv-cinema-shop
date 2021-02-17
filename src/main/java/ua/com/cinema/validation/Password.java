@@ -16,10 +16,4 @@ public @interface Password {
     String field();
 
     String fieldMatch();
-
-    @Target({ElementType.TYPE})
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface List {
-        Password[] value();
-    }
 }
