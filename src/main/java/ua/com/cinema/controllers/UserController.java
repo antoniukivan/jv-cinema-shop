@@ -8,6 +8,7 @@ import ua.com.cinema.model.User;
 import ua.com.cinema.model.dto.UserResponseDto;
 import ua.com.cinema.service.UserService;
 import ua.com.cinema.service.mappers.UserMapper;
+import ua.com.cinema.validation.Email;
 
 @RestController
 @RequestMapping("/users")
@@ -21,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/by-email")
-    public UserResponseDto getByEmail(@RequestParam String email) {
+    public UserResponseDto getByEmail(@RequestParam @Email String email) {
         User user = userService.findByEmail(email).get();
         return userMapper.getDtoFromModel(user);
     }
