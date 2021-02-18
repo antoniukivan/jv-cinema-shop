@@ -1,15 +1,12 @@
 package ua.com.cinema.model.dto;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class MovieSessionRequestDto {
     @NotNull(message = "The movie couldn't be null")
-    @Min(1)
     private Long movieId;
     @NotNull(message = "The cinema hall couldn't be null")
-    @Min(1)
     private Long cinemaHallId;
     @NotEmpty(message = "The movie session show time couldn't be empty")
     private String showTime;

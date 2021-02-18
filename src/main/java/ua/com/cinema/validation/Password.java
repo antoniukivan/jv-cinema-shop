@@ -10,7 +10,6 @@ import javax.validation.Constraint;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Password {
-
     String message() default "Passwords don't match!";
 
     String field();

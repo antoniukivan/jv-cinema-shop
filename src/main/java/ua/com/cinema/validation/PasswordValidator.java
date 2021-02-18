@@ -3,8 +3,9 @@ package ua.com.cinema.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.BeanWrapperImpl;
+import ua.com.cinema.model.dto.UserRegistrationDto;
 
-public class PasswordValidator implements ConstraintValidator<Password, String> {
+public class PasswordValidator implements ConstraintValidator<Password, UserRegistrationDto> {
     private String field;
     private String fieldMatch;
 
@@ -14,10 +15,11 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
     }
 
     @Override
-    public boolean isValid(String password, ConstraintValidatorContext constraintValidatorContext) {
-        Object fieldValue = new BeanWrapperImpl(password)
+    public boolean isValid(UserRegistrationDto registrationDto,
+                           ConstraintValidatorContext constraintValidatorContext) {
+        Object fieldValue = new BeanWrapperImpl(registrationDto)
                 .getPropertyValue(field);
-        Object fieldMatchValue = new BeanWrapperImpl(password)
+        Object fieldMatchValue = new BeanWrapperImpl(registrationDto)
                 .getPropertyValue(fieldMatch);
 
         if (fieldValue != null) {
