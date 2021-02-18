@@ -21,7 +21,7 @@ public class ShoppingCartDaoImpl extends AbstractDao<ShoppingCart, Long>
 
     @Override
     public ShoppingCart getByUser(User user) {
-        try (Session session = getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<ShoppingCart> getShoppingCartByUserQuery
                     = session.createQuery("from ShoppingCart sc left join fetch sc.tickets "
                     + "where sc.user = :user", ShoppingCart.class);

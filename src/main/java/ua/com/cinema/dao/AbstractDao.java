@@ -9,16 +9,12 @@ import org.hibernate.Transaction;
 import ua.com.cinema.exception.DataProcessingException;
 
 public abstract class AbstractDao<T, I extends Serializable> {
-    private final SessionFactory sessionFactory;
-    private final Class<T> clazz;
+    protected final SessionFactory sessionFactory;
+    protected final Class<T> clazz;
 
     protected AbstractDao(SessionFactory sessionFactory, Class<T> clazz) {
         this.sessionFactory = sessionFactory;
         this.clazz = clazz;
-    }
-
-    protected SessionFactory getSessionFactory() {
-        return sessionFactory;
     }
 
     public T add(T entity) {

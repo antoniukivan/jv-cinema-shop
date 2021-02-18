@@ -2,14 +2,14 @@ package ua.com.cinema.service.mappers;
 
 import org.springframework.stereotype.Component;
 import ua.com.cinema.model.User;
-import ua.com.cinema.model.dto.UserRequestDto;
+import ua.com.cinema.model.dto.UserRegistrationDto;
 import ua.com.cinema.model.dto.UserResponseDto;
 
 @Component
 public class UserMapper implements DtoMapper<User, UserResponseDto>,
-        ModelMapper<User, UserRequestDto> {
+        ModelMapper<User, UserRegistrationDto> {
     @Override
-    public User getModelFromDto(UserRequestDto requestDto) {
+    public User getModelFromDto(UserRegistrationDto requestDto) {
         User user = new User();
         user.setEmail(requestDto.getEmail());
         user.setPassword(requestDto.getPassword());

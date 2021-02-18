@@ -22,7 +22,7 @@ public class MovieSessionDaoImpl extends AbstractDao<MovieSession, Long>
 
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
-        try (Session session = getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<MovieSession> getAllMovieSessionsQuery
                     = session.createQuery("from MovieSession ms "
                     + "where ms.movie.id = :movieId "

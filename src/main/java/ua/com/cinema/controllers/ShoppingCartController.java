@@ -1,5 +1,7 @@
 package ua.com.cinema.controllers;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,14 +33,16 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/movie-sessions")
-    public void addMovieSession(@RequestParam Long userId, @RequestParam Long movieSessionId) {
+    public void addMovieSession(Authentication authentication, @RequestParam Long movieSessionId) {
+        UserDetails principal = (UserDetails) authentication.getPrincipal();
         shoppingCartService.addSession(movieSessionService.getById(movieSessionId),
-                userService.getById(userId).get());
+                userService.findByEmail(principal.getUsername()).get());
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Long userId) {
-        User user = userService.getById(userId).get();
+    public ShoppingCartResponseDto getByUser(Authentication authentication) {
+        UserDetails principal = (UserDetails) authentication.getPrincipal();
+        User user = userService.findByEmail(principal.getUsername()).get();
         return shoppingCartMapper.getDtoFromModel(shoppingCartService.getByUser(user));
     }
 }

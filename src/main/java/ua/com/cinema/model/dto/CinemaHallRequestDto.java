@@ -1,7 +1,14 @@
 package ua.com.cinema.model.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 public class CinemaHallRequestDto {
+    @Min(50)
+    @Max(500)
     private int capacity;
+    @NotEmpty(message = "The cinema hall description couldn't be empty")
     private String description;
 
     public String getDescription() {
