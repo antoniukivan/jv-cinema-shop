@@ -31,9 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/movies/**", "/cinema-halls/**").hasRole("ADMIN")
-                .antMatchers("/movie-sessions/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/movie-sessions/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/register").permitAll()
+                .antMatchers("/movies/**", "/cinema-halls/**", "/users/**",
+                        "/movie-sessions/**").hasRole("ADMIN")
+                .antMatchers("/orders/**", "/shopping-carts/**").hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/movies/**", "/cinema-halls/**",
+                        "/movie-sessions/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
