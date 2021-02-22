@@ -29,9 +29,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                     .stream()
                     .map(x -> x.getRoleName().name())
                     .toArray(String[]::new));
-        } else {
-            throw new UsernameNotFoundException("User not found.");
+            return builder.build();
         }
-        return builder.build();
+        throw new UsernameNotFoundException("User not found.");
     }
 }
