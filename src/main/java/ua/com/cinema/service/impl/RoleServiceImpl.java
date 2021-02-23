@@ -1,6 +1,5 @@
 package ua.com.cinema.service.impl;
 
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.com.cinema.dao.RoleDao;
@@ -22,7 +21,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Optional<Role> getRoleByName(String roleName) {
-        return roleDao.getRoleByName(roleName);
+    public Role getRoleByName(String roleName) {
+        return roleDao.getRoleByName(roleName).get();
     }
 }
