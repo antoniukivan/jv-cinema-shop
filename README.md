@@ -42,9 +42,9 @@ server link instead default Link.
 * REST
 
 ### To start you need:
-1.Download and install the JDK  
-2.Download and install servlet container (for example Apache Tomcat)  
-3.Download and install MySQL Server  
+1.Download and install the [JDK](https://www.oracle.com/java/technologies/javase-downloads.html)  
+2.Download and install servlet container (for example [Apache Tomcat](https://tomcat.apache.org/download-90.cgi,))  
+3.Download and install [MySQL](https://dev.mysql.com/downloads/)  
 * Setup new connection with:  
    - user: "your username"  
    - password: "your password"  
