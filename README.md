@@ -7,8 +7,8 @@ transmitted using JSON
 
 ### API Reference
 
-*PC - Personal Computer 
-*http://localhost:8080 - This is Cinema Shop website API url. You can use your own localhost
+* PC - Personal Computer 
+* http://localhost:8080 - This is Cinema Shop website API url. You can use your own localhost
 server link instead default Link.
 
 ### Web API
@@ -33,14 +33,20 @@ server link instead default Link.
 
 ### Built with
 
-⋅⋅*Java ⋅⋅*Tomcat ⋅⋅*Maven ⋅⋅*Spring Core/MVC/Security ⋅⋅*Hibernate ⋅⋅*MySQL ⋅⋅*REST
+* Java  
+* Tomcat  
+* Maven   
+* Spring Core/MVC/Security  
+* Hibernate  
+* MySQL  
+* REST
 
 ### To start you need:
-1.Download and install the JDK
-2.Download and install servlet container (for example Apache Tomcat)
-3.Download and install MySQL Server
-*Setup new connection with:
--user: "your username"
--password: "your password"
--url: jdbc:mysql://"your host name":"your port"/"your name db"?useUnicode=true&serverTimezone=UTC
+1.Download and install the [JDK](https://www.oracle.com/java/technologies/javase-downloads.html)  
+2.Download and install servlet container (for example [Apache Tomcat](https://tomcat.apache.org/download-90.cgi,))  
+3.Download and install [MySQL](https://dev.mysql.com/downloads/)  
+* Setup new connection with:  
+   - user: "your username"  
+   - password: "your password"  
+   - url: jdbc:mysql://"your host name":"your port"/"your name db"?useUnicode=true&serverTimezone=UTC  
 4.Run
